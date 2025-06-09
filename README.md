@@ -8,7 +8,7 @@ This repository provides tools for **dynamic parameter estimation** of the **WAM
 
 ---
 
-## 📁 Repository Structure
+## 📁 Repository Structure for each Configuration (Folders)
 
 ```
 .
@@ -21,8 +21,9 @@ This repository provides tools for **dynamic parameter estimation** of the **WAM
 │   └── gravity_<id>.json                    # Raw gravity vectors
 │
 ├── dataprocessing_nogravity.py              # Python script to filter and save joint data
-├── calculate_pi_wam_nogravity.m             # MATLAB script to estimate dynamic parameters
-├── estimate_or_evaluate_nograv.m            # MATLAB script for calculation/evaluation
+├── calculate_pi_nogravity.m                 # MATLAB script to estimate dynamic parameters
+├── evaluate_pi_nogravity.m                  # MATLAB script to evaluate dynamic parameters
+├── pi_nogravity.m                           # MATLAB script for calculation/evaluation
 └── README.md
 ```
 
@@ -81,7 +82,7 @@ processed_data/processed_data_4.mat
 ### 2. 🧮 Estimate Parameters in MATLAB
 
 ```matlab
-calculate_pi_wam_nogravity(4)
+calculate_pi_nogravity(4)
 ```
 
 This loads `processed_data_4.mat`, estimates dynamic parameters, and saves:
@@ -94,18 +95,18 @@ processed_data/pi_estimated_nograv_4.mat
 
 ### 3. 📊 Evaluate or Calculate Parameters (Flexible)
 
-Use the `estimate_or_evaluate_nograv.m` script to either **calculate** or **evaluate** parameter estimates:
+Use the `pi_nogravity.m` script to either **calculate** or **evaluate** parameter estimates:
 
 #### ➕ Calculate new parameters using data ID 4 and save with PI ID 7:
 
 ```matlab
-estimate_or_evaluate_nograv(4, 7, 'calc')
+pi_nogravity(4, 7, 'calc')
 ```
 
 #### 📊 Evaluate an existing estimate (e.g., pi_estimated_nograv_7.mat) on data 4:
 
 ```matlab
-estimate_or_evaluate_nograv(4, 7, 'eval')
+pi_nogravity(4, 7, 'eval')
 ```
 
 This supports using different datasets for training and testing.
@@ -114,7 +115,7 @@ This supports using different datasets for training and testing.
 
 ## 📌 Notes
 
-- Gravity compensation is explicitly handled and removed during processing.
+- Gravity compensation can be either included or excluded during the parameter estimation process. You can understand which folder includes or excludes gravity from the name, e.g., "..._nogravity."
 - Estimation uses SVD-based least-squares for numerical stability.
 - The regressor is designed for a 2-DOF WAM robot but can be extended to higher DOFs.
 - Outputs include:
@@ -127,6 +128,4 @@ This supports using different datasets for training and testing.
 
 ## 👨‍💻 Author
 
-**Amirhossein Noohian**  
-PhD Student – Robotics, Dynamics, and Control  
-University of Alberta
+**Amir Noohian**
